@@ -51,8 +51,8 @@ class ApacheDynIP(object):
             print "%s has not changed." % ip
             exit(1)
         else:
-        for ip in ip:
-            return ip
+            for ip in ip:
+                return ip
 
     def __write_config__(self):
         """ Write apache configuration to disk """
