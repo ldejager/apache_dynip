@@ -74,7 +74,6 @@ class ApacheDynIP(object):
         except IOError:
             print "Error writing current IP to {}".format(self._wdpath)
 
-    @staticmethod
     def __restart_apache__(self):
         """ Restart the httpd daemon once changes have been made """
 
