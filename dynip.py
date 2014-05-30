@@ -8,6 +8,7 @@
 
 import socket
 import argparse
+import subprocess
 
 args_parse = argparse.ArgumentParser(prog='dynip.py', usage='%(prog)s [domain] [config]')
 args_parse.add_argument("domain", help="Provide domain which we should resolve and update the apache configuration with")
@@ -28,6 +29,8 @@ class ApacheDynIP(object):
 
     def __get_old_ip__(self):
         """ Read the old IP from a tmp file """
+
+        global oldip
 
         try:
             with open(".ipdb", "r") as f:
@@ -68,6 +71,15 @@ class ApacheDynIP(object):
         except IOError:
             print "Error writing current IP to IPDB"
 
+    def __restart_apache__(self):
+        """ Restart the httpd daemon once changes have been made """
+
+        try:
+            command = ['service', 'httpd', 'reload']
+            subprocess.call(command, shell=False)
+        except:
+            print "Error reloading httpd"
+
 
 if __name__ == '__main__':
 
@@ -77,3 +89,4 @@ if __name__ == '__main__':
     DynIP.__get_old_ip__()
     DynIP.__write_config__()
     DynIP.__set_old_ip__()
+    DynIP.__restart_apache__()
