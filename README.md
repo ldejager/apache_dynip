@@ -1,6 +1,4 @@
 Apache DynIP
 ============
 
-THIS IS STILL IN PROGRESS
-
-Allows updating of apache configuration with dynamic IP (Allow from)
+Allows updating of the Apache "Allow from x.x.x.x " configuration with a dynamic IP periodically.

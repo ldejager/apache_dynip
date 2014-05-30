@@ -4,7 +4,7 @@
 #
 # Usage: dynip.py domain config
 # Example: dynip.py domain.com /path/to/apache/config/file/to/update
-# Requires: /tmp/oldip
+# Requires: .ipdb in the same directory as this script
 
 import socket
 import argparse
@@ -43,8 +43,6 @@ class ApacheDynIP(object):
 
         ip = socket.gethostbyname_ex(self._domain)[2]
         for ip in ip:
-            """ print ip """
-            """ print self.__get_old_ip__() """
             return ip
 
     def __write_config__(self):
