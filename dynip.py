@@ -26,7 +26,6 @@ class ApacheDynIP(object):
         self._domain = domain
         self._config = config
 
-    @staticmethod
     def __get_old_ip__(self):
         """ Read the old IP from a tmp file """
 
