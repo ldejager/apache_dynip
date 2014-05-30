@@ -70,7 +70,6 @@ class ApacheDynIP(object):
             print "Error writing current IP to IPDB"
 
 
-
 if __name__ == '__main__':
 
     DynIP = ApacheDynIP(argument.domain, argument.config)
