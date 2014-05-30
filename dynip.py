@@ -78,3 +78,4 @@ if __name__ == '__main__':
     DynIP.__get_new_ip__()
     DynIP.__get_old_ip__()
     DynIP.__write_config__()
+    DynIP.__set_old_ip__()
