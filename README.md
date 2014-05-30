@@ -6,8 +6,8 @@ Allows updating of the Apache "Allow from x.x.x.x " configuration with a dynamic
 Usage:      dynip.py domain config
 Example:    dynip.py home.dyndns.org /etc/httpd/conf.d/vhost.conf
 
-Known Issues
-============
+## Known Issues
+
 
 There needs to be a space between the IP address being replaced and the closing Location tag. I'm currently looking into this particular bug.
 
