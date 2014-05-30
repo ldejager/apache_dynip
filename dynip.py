@@ -62,7 +62,7 @@ class ApacheDynIP(object):
                 for line in newlines:
                     f.write(line)
         except IOError:
-            print "Error reading or writing configuration file"
+            print "Error reading or writing %s" % self._config
 
     def __set_old_ip__(self):
         """ Set obtained IP as the old IP in tmp file """
@@ -72,7 +72,7 @@ class ApacheDynIP(object):
                 f.write(self.__get_new_ip__())
                 f.close()
         except IOError:
-            print "Error writing current IP to {}".format(self._wdpath)
+            print "Error writing current IP to %s" % self._wdpath
 
     def __restart_apache__(self):
         """ Restart the httpd daemon once changes have been made """
