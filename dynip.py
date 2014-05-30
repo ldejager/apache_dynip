@@ -31,10 +31,10 @@ class ApacheDynIP(object):
         """ Read the old IP from a tmp file """
 
         try:
-            with open("/tmp/oldip", "r") as f:
+            with open(".ipdb", "r") as f:
                 oldip = f.readline()
         except IOError:
-            print "Unable to read tmp file"
+            print "Unable to read IPDB"
 
         return oldip
 
@@ -63,6 +63,14 @@ class ApacheDynIP(object):
 
     def __set_old_ip__(self):
         """ Set obtained IP as the old IP in tmp file """
+
+        try:
+            with open(".ipdb", "w") as f:
+                f.write(self.__get_new_ip__())
+                f.close()
+        except IOError:
+            print "Error writing current IP to IPDB"
+
 
 
 if __name__ == '__main__':
