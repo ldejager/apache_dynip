@@ -16,6 +16,7 @@ argument = args_parse.parse_args()
 
 oldip = ""
 
+
 class ApacheDynIP(object):
     """ Apache Dynamic IP Class """
 
@@ -59,6 +60,9 @@ class ApacheDynIP(object):
                     f.write(line)
         except IOError:
             print "Error reading or writing configuration file"
+
+    def __set_old_ip__(self):
+        """ Set obtained IP as the old IP in tmp file """
 
 
 if __name__ == '__main__':
