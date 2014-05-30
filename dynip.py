@@ -38,7 +38,7 @@ class ApacheDynIP(object):
             with open(self._wdpath, "r") as f:
                 oldip = f.readline()
         except IOError:
-            print "Unable to read {}".format(self._wdpath)
+            print "Unable to read %s" % self._wdpath
             exit(1)
 
         return oldip
