@@ -47,6 +47,10 @@ class ApacheDynIP(object):
         """ Grab IP address from provided domain name """
 
         ip = socket.gethostbyname_ex(self._domain)[2]
+        if ip is oldip:
+            print "%s has not changed." % ip
+            exit(1)
+        else:
         for ip in ip:
             return ip
 
