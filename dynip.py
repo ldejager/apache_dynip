@@ -10,6 +10,7 @@ import socket
 import argparse
 import subprocess
 import os
+import logging
 
 args_parse = argparse.ArgumentParser(prog='dynip.py', usage='%(prog)s [domain] [config]')
 args_parse.add_argument("domain", help="Provide domain which we should resolve and update the apache configuration with")
@@ -38,7 +39,7 @@ class ApacheDynIP(object):
             with open(self._wdpath, "r") as f:
                 oldip = f.readline().rstrip()
         except IOError:
-            print "Unable to read %s" % self._wdpath
+            logging.error("Unable to read %s") % self._wdpath
             exit(1)
 
         return oldip
@@ -50,7 +51,7 @@ class ApacheDynIP(object):
 
         for ip in ip:
             if ip == self.__get_old_ip__():
-                print "No changes have been detected"
+                logging.warning("No changes have been detected, exiting!")
                 exit(1)
             else:
                 return ip
@@ -67,7 +68,7 @@ class ApacheDynIP(object):
                 for line in newlines:
                     f.write(line)
         except IOError:
-            print "Error reading or writing %s" % self._config
+            logging.error("IO error on %s") %s self._config
 
     def __set_old_ip__(self):
         """ Set obtained IP as the old IP in tmp file """
@@ -77,7 +78,7 @@ class ApacheDynIP(object):
                 f.write(self.__get_new_ip__())
                 f.close()
         except IOError:
-            print "Error writing current IP to %s" % self._wdpath
+            logging.error("Error writing current IP to %s") % self._wdpath
 
     def __restart_apache__(self):
         """ Restart the httpd daemon once changes have been made """
@@ -86,7 +87,7 @@ class ApacheDynIP(object):
             command = ['service', 'httpd', 'reload']
             subprocess.call(command, shell=False)
         except OSError, e:
-            print "Error reloading httpd:", e
+            logging.error("Error reloading httpd", e)
 
 
 if __name__ == '__main__':
