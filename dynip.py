@@ -51,7 +51,7 @@ class ApacheDynIP(object):
 
         for ip in ip:
             if ip == self.__get_old_ip__():
-                logging.warning("No changes have been detected, exiting!")
+                logging.info("No changes have been detected, exiting!")
                 exit(1)
             else:
                 return ip
@@ -89,13 +89,18 @@ class ApacheDynIP(object):
         except OSError, e:
             logging.error("Error reloading httpd", e)
 
+    def __main__(self):
+        """ Main function """
+
+        self.__get_new_ip__()
+        self.__get_old_ip__()
+        self.__write_config__()
+        self.__set_old_ip__()
+        self.__restart_apache__()
+
 
 if __name__ == '__main__':
 
     DynIP = ApacheDynIP(argument.domain, argument.config)
 
-    DynIP.__get_new_ip__()
-    DynIP.__get_old_ip__()
-    DynIP.__write_config__()
-    DynIP.__set_old_ip__()
-    DynIP.__restart_apache__()
+    DynIP.__main__()
