@@ -68,7 +68,7 @@ class ApacheDynIP(object):
                 for line in newlines:
                     f.write(line)
         except IOError:
-            logging.error("IO error on %s") %s self._config
+            logging.error("IO error on %s") % self._config
 
     def __set_old_ip__(self):
         """ Set obtained IP as the old IP in tmp file """
