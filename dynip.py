@@ -36,7 +36,7 @@ class ApacheDynIP(object):
 
         try:
             with open(self._wdpath, "r") as f:
-                oldip = f.readline()
+                oldip = f.readline().rstrip()
         except IOError:
             print "Unable to read %s" % self._wdpath
             exit(1)
@@ -47,11 +47,12 @@ class ApacheDynIP(object):
         """ Grab IP address from provided domain name """
 
         ip = socket.gethostbyname_ex(self._domain)[2]
-        if ip == oldip:
-            print "%s has not changed." % ip
-            exit(1)
-        else:
-            for ip in ip:
+
+        for ip in ip:
+            if ip == self.__get_old_ip__():
+                print "No changes have been detected"
+                exit(1)
+            else:
                 return ip
 
     def __write_config__(self):
